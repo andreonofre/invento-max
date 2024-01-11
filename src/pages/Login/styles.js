@@ -58,6 +58,7 @@ export const Form = styled.form`
 export const Label = styled.label`
     font-size: .9rem;
 `
+
 export const Input = styled.input`
     width: 300px;
     height: 35px;
@@ -67,15 +68,14 @@ export const Input = styled.input`
     border-radius: 4px;
     outline: none;
     border: none;
-    
 `
 
 export const Button = styled.button`
-    width: 100%;
+    width: 300px;
     height: 40px;
 
-    padding: 10px 15px;
     margin-top: 20px;
+    margin-left: -8px;
 
     font-size: 16px;
     font-weight: 700;

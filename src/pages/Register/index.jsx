@@ -1,7 +1,14 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 
-import { Container, Content, Form, Label, Input, Button } from './styles'
+import { 
+    Container, 
+    Content, 
+    Form, 
+    Label, 
+    Input, 
+    Button 
+} from './styles';
 
 export function Register () {
   return (
@@ -14,7 +21,7 @@ export function Register () {
                 id='usuario'
                 type='text'
                 className='user'
-                placeholder='    Ex: maria'
+                placeholder='    Ex: Maria'
                  />
 
                 <Label htmlFor='usuario'>E-mail</Label>
@@ -22,7 +29,7 @@ export function Register () {
                 id='usuario'
                 type='text'
                 className='user'
-                placeholder='    Ex: maria'
+                placeholder='    Ex: maria@gmail.com'
                  />
 
                 <Label htmlFor='senha'>Senha</Label>
@@ -32,17 +39,15 @@ export function Register () {
                 className='pass'
                 placeholder=''
                 />
-
               
-                    <Link to={`/`}>
-                        <Button className="color-link" type="submit">
-                            Cadastar
-                        </Button>
-                    </Link>
-            
-
+                <Link to={`/`}>
+                    <Button className="color-link" type="submit">
+                        Cadastar
+                    </Button>
+                </Link>
+        
             </Form>
         </Content>
     </Container>
-  )
-}
+  );
+};

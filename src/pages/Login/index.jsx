@@ -15,7 +15,7 @@ export function Login () {
                 id='usuario'
                 type='text'
                 className='user'
-                placeholder='    Ex: maria'
+                placeholder='    Ex: maria@gmail.com'
                  />
 
                 <Label htmlFor='senha'>Senha</Label>
@@ -24,10 +24,12 @@ export function Login () {
                 type='password'
                 className='pass'
                 placeholder=''
-
                 />
 
-                <Button type="submit">Entrar</Button>
+                <Link to={`/dashboard`}>
+                  <Button type="submit">Entrar</Button>
+                </Link>
+
                 <p>Ainda não possui conta?
                   <Link to={`/register`}>Clique aqui</Link>
                 </p>
