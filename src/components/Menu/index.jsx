@@ -89,28 +89,28 @@ export function Menu() {
   const list = (
     <List sx={{ width: 250, marginTop: 4.5}}>
 
-      <ListItemButton component={Link} to="/inbox">
+      <ListItemButton component={Link} to="/cadastro">
         <ListItemIcon>
           <InboxIcon />
         </ListItemIcon>
         <ListItemText primary="Cadastrar Produto" />
       </ListItemButton>
 
-      <ListItemButton component={Link} to="/starred">
+      <ListItemButton component={Link} to="/entrada">
         <ListItemIcon>
           <MailIcon />
         </ListItemIcon>
         <ListItemText primary="Entrada" />
       </ListItemButton>
 
-      <ListItemButton component={Link} to="/send-email">
+      <ListItemButton component={Link} to="/saida">
         <ListItemIcon>
           <MailIcon />
         </ListItemIcon>
         <ListItemText primary="Saída" />
       </ListItemButton>
 
-      <ListItemButton component={Link} to="/send-email">
+      <ListItemButton component={Link} to="/saldo_atual">
         <ListItemIcon>
           <MailIcon />
         </ListItemIcon>
@@ -138,6 +138,11 @@ export function Menu() {
       <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
         {list}
       </Drawer>
+
+      
+      
+      
+      {/* IFRAME */}
 
       <StyledIframeContainer>
         <StyledIframe title="Dash InventoMax" width="600" height="373.5" src="" frameborder="0" allowFullScreen="true" />

@@ -1,8 +1,10 @@
 import React from 'react'
 import { Container } from './styles'
 
-export function Register () {
+export function Balance () {
   return (
-    <Container>Cadastro</Container>
+    <Container>
+      Saldo Atual
+    </Container>
   )
 }

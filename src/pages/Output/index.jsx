@@ -1,8 +1,10 @@
 import React from 'react'
 import { Container } from './styles'
 
-export function Register () {
+export function Output () {
   return (
-    <Container>Cadastro</Container>
+    <Container>
+      Saída
+    </Container>
   )
 }
