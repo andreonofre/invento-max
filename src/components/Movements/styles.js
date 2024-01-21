@@ -3,17 +3,14 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     width: 100%;
-
-`
+    margin-top: 80px;
+    `
 
 export const Content = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    margin-top: 100px;
-    
     
     width: 500px;
     height: 400px;
@@ -35,14 +32,11 @@ export const Content = styled.div`
         justify-content: space-between;
         margin-top: 30px;
     }
-
-    .product {
-        margin-bottom: 30px;
-    }
 `
 
 
 export const StyledAutocomplete = styled(Autocomplete)`
+    margin-bottom: 30px;
 `;
 
 export const StyledTextField = styled(TextField)`

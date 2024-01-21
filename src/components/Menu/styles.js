@@ -5,10 +5,7 @@ export const Container = styled.div`
   h1 {
     text-align: center;
     font-size: 3rem;
-    margin-right: 20px;
-
   }
-
 `;
 
 export const Content = styled.div`
@@ -20,15 +17,28 @@ export const Content = styled.div`
     .icon-menu {
         margin-left: 20px;
     }
-
 `;
 
-export const StyledIframeContainer = styled.div`
-  width: 100%;
+export const User = styled.div`
+    display: flex;
+    align-items: center;
+
+    gap: 20px;
+    margin-right: 20px;
+
+    div {
+      font-size: 20px;
+      font-weight:bold;
+    }
 `;
 
-export const StyledIframe = styled.iframe`
-  width: 100%;
-  height: 1000px;
-  border: none;
-`;
+
+// export const StyledIframeContainer = styled.div`
+//   width: 100%;
+// `;
+
+// export const StyledIframe = styled.iframe`
+//   width: 100%;
+//   height: 1000px;
+//   border: none;
+// `;

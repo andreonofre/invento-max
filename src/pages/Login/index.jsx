@@ -1,20 +1,56 @@
-import React from 'react'
-import { Link } from "react-router-dom";
+import React, { useState } from 'react'
+import { Link, useNavigate } from "react-router-dom";
 import { Container, Content, Form, Label, Input, Button } from './styles'
+import { toast } from 'react-toastify';
 
 export function Login () {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    // Obtém os dados do localStorage
+    const userData = JSON.parse(localStorage.getItem('user_data')) || [];
+
+    // Verifica se o usuário existe
+    const user = userData.find((user) => user.email === email && user.password === password);
+    
+    if (user) {
+      // Usuário autenticado, redireciona para a dashboard
+      toast.success('Seja Bem-Vindo(a)!');
+      navigate('/dashboard');
+    } else {
+      toast.error('Credenciais inválidas. Cadastre-se primeiro.');
+    }
+  };
+
+
   return (
     <Container>
         <h1>InventoMax</h1>
         <Content>
-            <Form onSubmit={"handleSave"}>
+            <Form onSubmit={handleLogin}>
 
                 <Label htmlFor='usuario'>E-mail</Label>
                 <Input 
-                id='usuario'
+                id='email'
                 type='text'
                 className='user'
                 placeholder='    Ex: maria@gmail.com'
+                value={email}
+                onChange={handleEmailChange}
                  />
 
                 <Label htmlFor='senha'>Senha</Label>
@@ -23,11 +59,13 @@ export function Login () {
                 type='password'
                 className='pass'
                 placeholder=''
+                value={password}
+                onChange={handlePasswordChange}
                 />
 
-                <Link to={`/dashboard`}>
+                {/* <Link to={`/dashboard`}> */}
                   <Button type="submit">Entrar</Button>
-                </Link>
+                {/* </Link> */}
 
                 <p>Ainda não possui conta?
                   <Link to={`/signup`}>Clique aqui</Link>

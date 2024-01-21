@@ -9,11 +9,12 @@ import { Register } from '../pages/Register';
 import { Input } from "../pages/Input/index"
 import { Output } from "../pages/Output/index"
 import { Balance } from '../pages/Balance';
-
+import { Menu } from '../components/Menu';
 
 function RoutesApp () {
   return (
     <BrowserRouter>
+      {/* <Menu /> */}
       <Routes>
         <Route path="/" element={<Login />}/>
         <Route path="/signup" element={<Signup />}/>

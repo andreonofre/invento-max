@@ -83,7 +83,7 @@ export const Button = styled.button`
 
     padding: 10px 15px;
     margin-top: 20px;
-    margin-left: -10px;
+    /* margin-left: -10px; */
 
     font-size: 16px;
     font-weight: 700;

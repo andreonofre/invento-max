@@ -51,7 +51,6 @@ export const Form = styled.form`
     a {
         padding-left: 10px;
         color: #002fff;
-
     }
 `
 
@@ -71,11 +70,11 @@ export const Input = styled.input`
 `
 
 export const Button = styled.button`
-    width: 300px;
+    width: 304px;
     height: 40px;
 
     margin-top: 20px;
-    margin-left: -8px;
+    /* margin-left: 10px; */
 
     font-size: 16px;
     font-weight: 700;

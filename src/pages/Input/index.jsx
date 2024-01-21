@@ -1,10 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { Container } from './styles'
+import { Menu } from '../../components/Menu'
+import { Movements } from '../../components/Movements'
 
 export function Input () {
   return (
-    <Container>Entrada</Container>
+    <Container>
+      <Menu />
+      <Movements title="Entrada"/>
+    </Container>
   )
 }
 
