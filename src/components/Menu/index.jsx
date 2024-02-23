@@ -3,7 +3,6 @@ import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -26,36 +25,40 @@ import {
 
 export function Menu() {
   const [open, setOpen] = useState(false);
-  const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
 
   const navigate = useNavigate();
 
 
   useEffect(() => {
     // Tenta obter o nome do usuário do localStorage ao carregar o componente
-    const storedUsername = localStorage.getItem('username');
-    if (storedUsername) {
-      setUsername(storedUsername);
-    }
-  }, []); 
+    const loggedInUser = localStorage.getItem("loggedInUser");
 
+    if (loggedInUser) {
+      setName(loggedInUser);
+    }
+  }, []);
 
 
   const toggleDrawer = (isOpen) => () => {
     setOpen(isOpen);
   };
-
+  
   function handleExit () {
      // Limpa o nome do usuário do localStorage ao sair
-     localStorage.removeItem('username');
+     localStorage.removeItem('loggedInUser');
     navigate("/")
   }
 
-  // Obtém o nome de usuário armazenado no localStorage
-  const loggedInUser = localStorage.getItem('username');
-
   const list = (
     <List sx={{ width: 250, marginTop: 4.5}}>
+
+      <ListItemButton component={Link} to="/dashboard">
+        <ListItemIcon>
+          <InboxIcon />
+        </ListItemIcon>
+        <ListItemText primary="DashBoard" />
+      </ListItemButton>
 
       <ListItemButton component={Link} to="/cadastro">
         <ListItemIcon>
@@ -85,6 +88,13 @@ export function Menu() {
         <ListItemText primary="Saldo Atual" />
       </ListItemButton>
 
+      <ListItemButton component={Link} to="/lista_produtos">
+        <ListItemIcon>
+          <MailIcon />
+        </ListItemIcon>
+        <ListItemText primary="Lista Produtos" />
+      </ListItemButton>
+
       <ListItemButton component={Link} to="/">
         <ListItemIcon>
           <MailIcon />
@@ -109,7 +119,7 @@ export function Menu() {
         </IconButton>
         <h1>InventoMax</h1>
         <User>
-          <div>{username || 'Usuário não logado'}</div>
+          <div>{name}</div>
           <FontAwesomeIcon icon={faUser} fontSize={25}/>
         </User>
       </Content>

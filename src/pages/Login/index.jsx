@@ -21,13 +21,22 @@ export function Login () {
   const handleLogin = (e) => {
     e.preventDefault();
 
+     // Verifica se algum campo está vazio
+     if (!email || !password) {
+      toast.error("Preencha todos os campos!");
+      return;
+    }
+
+    // Obtém os dados do localStorage
     // Obtém os dados do localStorage
     const userData = JSON.parse(localStorage.getItem('user_data')) || [];
-
+    
     // Verifica se o usuário existe
     const user = userData.find((user) => user.email === email && user.password === password);
     
     if (user) {
+       // Salva o nome do usuário no localStorage
+      localStorage.setItem('loggedInUser', user.username);
       // Usuário autenticado, redireciona para a dashboard
       toast.success('Seja Bem-Vindo(a)!');
       navigate('/dashboard');
@@ -48,7 +57,7 @@ export function Login () {
                 id='email'
                 type='text'
                 className='user'
-                placeholder='    Ex: maria@gmail.com'
+                placeholder='Ex: maria@gmail.com'
                 value={email}
                 onChange={handleEmailChange}
                  />

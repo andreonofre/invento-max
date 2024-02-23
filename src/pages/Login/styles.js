@@ -61,7 +61,7 @@ export const Label = styled.label`
 export const Input = styled.input`
     width: 300px;
     height: 35px;
-
+    padding-left: 20px;
     background: var(--lightgray);
 
     border-radius: 4px;
@@ -70,7 +70,7 @@ export const Input = styled.input`
 `
 
 export const Button = styled.button`
-    width: 304px;
+    width: 320px;
     height: 40px;
 
     margin-top: 20px;

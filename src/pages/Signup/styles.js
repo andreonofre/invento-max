@@ -69,6 +69,8 @@ export const Input = styled.input`
     width: 300px;
     height: 35px;
 
+    padding-left: 20px;
+
     background: var(--lightgray);
 
     border-radius: 4px;

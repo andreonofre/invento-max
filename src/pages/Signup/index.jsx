@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import { Link, useHistory } from "react-router-dom";
 // import { createBrowserHistory } from 'history';
 import { useNavigate } from "react-router-dom";
@@ -8,13 +8,12 @@ import { toast } from "react-toastify";
 
 import { Container, Content, Form, Label, Input, Button } from "./styles";
 
-
 export function Signup() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [savedData, setSavedData] = useState([]);
-  
+  const [savedData, setSavedData] = useState([]);
+
   // const history = createBrowserHistory ();
   const navigate = useNavigate();
 
@@ -30,48 +29,51 @@ export function Signup() {
     setPassword(e.target.value);
   };
 
-  const handleSave = (e) => {
-    e.preventDefault();
 
+
+    const handleSave = (e) => {
+    e.preventDefault();
+  
     // Verifica se algum campo está vazio
     if (!username || !email || !password) {
       toast.error("Preencha todos os campos!");
       return;
     }
-
+  
     const newFormData = {
       username,
       email,
       password,
       id: uuidv4(),
     };
+  
+    let newSavedData = savedData
+    newSavedData.push(newFormData)
 
-    // Salvando os novos dados no array
-    // setSavedData((prevSavedData) => [...prevSavedData, newFormData]);
+    setSavedData(newSavedData);
+    
+    localStorage.setItem("user_data", JSON.stringify(newSavedData));
 
-    // Obtém os dados existentes no localStorage
-    const existingData = JSON.parse(localStorage.getItem("user_data")) || [];
+    console.log("Estado depois de atualizar: ", newSavedData);
+    
 
-    // Adiciona o novo usuário aos dados existentes
-    const updatedData = [...existingData, newFormData];
-
-    // Somente Usuário
-    localStorage.setItem('username', username);
-
-    // Atualiza o localStorage
-    localStorage.setItem("user_data", JSON.stringify(updatedData));
-
-    // Limpando o formulário após salvar
+    toast.success("Usuário Cadastrado com sucesso, faça o login abaixo!")
+    // Limpa os campos do formulário
     setUsername("");
     setEmail("");
     setPassword("");
-
-    console.log('Dados salvos:', updatedData);
-
-    toast.success("Usuário cadastrado com sucesso!");
-    // history.push('/');
-    navigate('/');
+    
+    // Navega para a próxima página
+    navigate("/");
   };
+
+
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem("user_data") || "[]")
+    setSavedData(userData)
+    
+  },[])
+
 
   return (
     <Container>
@@ -83,7 +85,7 @@ export function Signup() {
             id="usuario"
             type="text"
             className="user"
-            placeholder="    Ex: Maria"
+            placeholder="Ex: Maria"
             value={username}
             onChange={handleUsernameChange}
           />
@@ -108,11 +110,11 @@ export function Signup() {
             onChange={handlePasswordChange}
           />
 
-          {/* <Link to={`/`}> */}
+    
           <Button className="color-link" type="submit">
             Cadastar
           </Button>
-          {/* </Link> */}
+
         </Form>
       </Content>
     </Container>

@@ -7,7 +7,7 @@ export function Output () {
   return (
     <Container>
       <Menu />
-      <Movements title="Saída"/>
+      <Movements title="Saída" />
     </Container>
   )
 }

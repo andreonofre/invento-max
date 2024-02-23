@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Button } from "@mui/material";
 import { toast } from "react-toastify";
+import { v4 as uuidv4 } from "uuid";
+import { useMovimentsContext } from "../../context/ContextMoviments";
 
 import { 
   Container, 
@@ -10,19 +12,71 @@ import {
 } from "./styles";
 
 export function Movements({ title }) {
-  const options = 
-  [
-    {label: "Carro"}, 
-    {label: "Moto"},
-  
-  ]
+  // const teste = React.useContext(ContextMoviments);
+  const { moviments, setMoviments } = useMovimentsContext();
+  const [producSelected, setProducSelected] = useState("")
+  const [quantity, setQuantity] = useState("")
+  const [user, setUser] = useState('');
+
+
+const list = useMemo(() => {
+  const dataLocalStorage = JSON.parse(localStorage.getItem("Cadastro"))
+  // setData(dataLocalStorage)
+  return dataLocalStorage
+},[])
+
+
+ //Recuperando usuário
+ useEffect(() => {
+  const user = localStorage.getItem("loggedInUser")
+  setUser(user)
+  // console.log("USER: ",user)
+},[])
 
   function handleSave () {
-    toast.success("Salvou")
+  
+    if (!quantity || !producSelected) {
+      toast.error("Por favor, preencha todos os campos.");
+      return;
+    }
+
+    if (quantity < 0) {
+      toast.error("Adicione um número positivo")
+      return;
+    }
+    
+    const type = title === "Entrada" ? "input" : "output" 
+    
+    const newDataInput = {
+      producSelected,
+      quantity,
+      id: uuidv4(),
+      dataMoviment: new Date(),
+      type,
+      user: user
+    }
+
+    // setMoviments([...moviments, newDataInput]);
+
+    let newSaveMoviments = moviments
+    newSaveMoviments.push(newDataInput)
+
+    setMoviments(newSaveMoviments);
+    
+    localStorage.setItem("Moviments", JSON.stringify(newSaveMoviments))
+    // setFormDataState(newDataInput)
+
+    toast.success("Movimentação realizada com sucesso!")
+    
+    handleClear()
+
+    console.log("MOVIMENTOS: ", moviments)
+
   }
 
   function handleClear () {
-    toast.success("Limpou estados")
+    setQuantity("")
+    setProducSelected(""); 
   }
   
   return (
@@ -32,14 +86,14 @@ export function Movements({ title }) {
         <StyledAutocomplete
           disablePortal
           id="combo-box-demo"
-          options={options}
+          options={list.map((item) => item.productName)}
           sx={{ width: 400 }}
+          value={producSelected}
+          onChange={(event, newValue) => setProducSelected(newValue)}
           renderInput={(params) => (
             <StyledTextField
               {...params}
               label="Nome produto"
-              // value={productName}
-              // onChange={(e) => setProductName(e.target.value)}
             />
           )}
         />
@@ -51,8 +105,8 @@ export function Movements({ title }) {
           variant="outlined"
           type="number"
           sx={{ width: 400 }}
-          // value={quantity}
-          // onChange={(e) => setQuantity(e.target.value)}
+          value={quantity}
+          onChange={(e) => setQuantity(e.target.value)}
         />
 
         <div className="buttons">
@@ -72,7 +126,6 @@ export function Movements({ title }) {
           </Button>
 
         </div>
-
       </Content>
     </Container>
   );

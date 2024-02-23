@@ -9,6 +9,7 @@ import { Register } from '../pages/Register';
 import { Input } from "../pages/Input/index"
 import { Output } from "../pages/Output/index"
 import { Balance } from '../pages/Balance';
+import { ListProducts } from '../pages/ListProducts';
 import { Menu } from '../components/Menu';
 
 function RoutesApp () {
@@ -23,6 +24,7 @@ function RoutesApp () {
         <Route path="/entrada" element={<Input />}/>
         <Route path="/saida" element={<Output />}/>
         <Route path="/saldo_atual" element={<Balance />}/>
+        <Route path="/lista_produtos" element={<ListProducts />}/>
       </Routes>
     </BrowserRouter>
   );

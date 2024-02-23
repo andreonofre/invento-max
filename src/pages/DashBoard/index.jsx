@@ -8,7 +8,7 @@ export function DashBoard () {
     <Container>
       <Menu />
       {/* IFRAME */}
-
+      POWER BI
          <StyledIframeContainer>
         <StyledIframe title="Dash InventoMax" width="600" height="373.5" src="" frameborder="0" allowFullScreen="true" />
       </StyledIframeContainer>
