@@ -49,7 +49,8 @@ export function Register () {
 
 
   // setInfoRegister([...infoRegister, dataProducts])
-  setInfoRegister((state) => [...state, dataProducts])
+  // setInfoRegister((state) => [...state, dataProducts])
+  setInfoRegister([...infoRegister, dataProducts])
 
   setProductCounter((prevCounter) => prevCounter + 1);
 
