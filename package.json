@@ -13,6 +13,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@tsparticles/react": "^3.0.0",
     "history": "^5.3.0",
     "json-server": "^1.0.0-alpha.22",
     "react": "^18.2.0",
@@ -21,7 +22,9 @@
     "react-scripts": "5.0.1",
     "react-sidebar": "^3.0.2",
     "react-toastify": "^10.0.4",
+    "react-tsparticles": "^2.12.2",
     "styled-components": "^6.1.6",
+    "tsparticles": "^3.3.0",
     "uuid": "^9.0.1",
     "web-vitals": "^2.1.4"
   },

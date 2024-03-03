@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import { Container, Content, Form, Label, Input, Button } from './styles'
 import { toast } from 'react-toastify';
+import ParticlesComponent from '../../components/ParticlesBackground/ParticlesBg';
+
 
 export function Login () {
 
@@ -28,7 +30,6 @@ export function Login () {
     }
 
     // Obtém os dados do localStorage
-    // Obtém os dados do localStorage
     const userData = JSON.parse(localStorage.getItem('user_data')) || [];
     
     // Verifica se o usuário existe
@@ -47,6 +48,8 @@ export function Login () {
 
 
   return (
+    <>
+        <ParticlesComponent/>
     <Container>
         <h1>InventoMax</h1>
         <Content>
@@ -82,5 +85,6 @@ export function Login () {
             </Form>
         </Content>
     </Container>
+    </>
   )
 }

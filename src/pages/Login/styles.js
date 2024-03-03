@@ -7,8 +7,14 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
 
+
     h1 {
         text-align: center;
+        font-size: 4rem;
+        z-index: 3;
+        background: linear-gradient(to right, #2e21ec, #031080);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
 `
 
@@ -26,6 +32,9 @@ export const Content = styled.div`
 
     background: var(--main);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+
+    z-index: 3;
+
 `
 
 export const Form = styled.form`
