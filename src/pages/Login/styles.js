@@ -30,7 +30,8 @@ export const Content = styled.div`
     width: 500px;
     height: 400px;
 
-    background: var(--main);
+    /* background: var(--main); */
+    background: transparent;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 
     z-index: 3;

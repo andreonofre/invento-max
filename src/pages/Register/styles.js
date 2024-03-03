@@ -16,7 +16,7 @@ export const Content = styled.div`
     
     
     width: 500px;
-    height: 400px;
+    height: 450px;
     margin: 0 auto;
     
     border-radius: 8px;
@@ -38,6 +38,10 @@ export const Content = styled.div`
 
     .product {
         margin-bottom: 30px;
+    }
+
+    .imageUrl {
+        margin-top: 30px;
     }
 `
 

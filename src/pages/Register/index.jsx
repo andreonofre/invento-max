@@ -14,6 +14,8 @@ export function Register () {
   const [fornecedor, setFornecedor] = useState('');
   const [user, setUser] = useState('');
   const [infoRegister, setInfoRegister] = useState([]);
+  const [imageUrl, setImageUrl] = useState('');
+
  
   // Recuperando usuário
   useEffect(() => {
@@ -39,6 +41,7 @@ export function Register () {
     const dataProducts = {
       productName,
       fornecedor,
+      url: imageUrl,
       id: uuidv4(),
       user,
       dataRegister: new Date(),
@@ -97,6 +100,18 @@ export function Register () {
           value={fornecedor}
           onChange={(e) => setFornecedor(e.target.value)}
         />
+
+        <StyledTextField 
+          className="imageUrl"
+          id="outlined-basic" 
+          label="URL da Imagem" 
+          variant="outlined"
+          type="text"
+          sx={{ width: 400}}
+          value={imageUrl}
+          onChange={(e) => setImageUrl(e.target.value)}
+        />
+
 
         <div className="buttons">
           <Button 
