@@ -10,16 +10,27 @@ import { Container,
 } from './styles'
 
 export function Register () {
-
   const [productName, setProductName] = useState('');
   const [fornecedor, setFornecedor] = useState('');
   const [user, setUser] = useState('');
-  const [infoRegister, setInfoRegister] = useState([])
-  const [productCounter, setProductCounter] = useState(1);
+  const [infoRegister, setInfoRegister] = useState([]);
  
+  // Recuperando usuário
+  useEffect(() => {
+    const user = localStorage.getItem("loggedInUser")
+    setUser(user)
+  },[])
+
+  // Carregando dados do localStorage ao montar o componente
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem("Cadastro"));
+    if (storedData) {
+      setInfoRegister(storedData);
+    }
+  },[]);
+
   // Função para lidar com a submissão do formulário
   const handleSave = () => {
-
     if (!productName || !fornecedor) {
       toast.error("Por favor, preencha todos os campos!")
       return;
@@ -29,75 +40,29 @@ export function Register () {
       productName,
       fornecedor,
       id: uuidv4(),
-      user: user,
+      user,
       dataRegister: new Date(),
-      sequentialId: productCounter
+      sequentialId: infoRegister.length + 1 // Gerando o número sequencial dinamicamente
     }
 
-    // Verifica se o produto já está cadastrado
-  const productHasStorage = JSON.parse(localStorage.getItem("Cadastro"))
+    const productHasStorage = JSON.parse(localStorage.getItem("Cadastro")) || [];
     
-  const isProductAlreadyExists = productHasStorage.some(
-    (product) => product.productName === dataProducts.productName
-  );
+    const isProductAlreadyExists = productHasStorage.some(
+      (product) => product.productName === dataProducts.productName
+    );
 
+    if (isProductAlreadyExists) {
+      toast.error("Este produto já foi cadastrado.");
+      return;
+    }
 
-  if (isProductAlreadyExists) {
-    toast.error("Este produto já foi cadastrado.");
-    return;
-  }
+    const updatedRegister = [...productHasStorage, dataProducts];
+    setInfoRegister(updatedRegister);
+    localStorage.setItem("Cadastro", JSON.stringify(updatedRegister));
 
-
-  // setInfoRegister([...infoRegister, dataProducts])
-  // setInfoRegister((state) => [...state, dataProducts])
-  setInfoRegister([...infoRegister, dataProducts])
-
-  setProductCounter((prevCounter) => prevCounter + 1);
-
-  // console.log("INFOREGISTER: ",infoRegister)
-
-  localStorage.setItem("Cadastro", JSON.stringify(infoRegister))
-
-  toast.success("Produto cadastrado com sucesso.")
-  
-  handleClear()
-    
+    toast.success("Produto cadastrado com sucesso.")
+    handleClear();
   };
-
-
-
-  // useEffect(() => {
-  //   const storedData = JSON.parse(localStorage.getItem("Cadastro"));
-  //   console.log("Storede: ",storedData)
-
-  //   if (storedData) {
-  //     setInfoRegister(storedData);
-  //   }
-  // },[]);
-  
- //Recuperando usuário
-  useEffect(() => {
-    const user = localStorage.getItem("loggedInUser")
-    setUser(user)
-    // console.log("USER: ",user)
-  },[])
-
-  // Setando Itens cadastrados no localStorage
-  useEffect(() => {
-    if (infoRegister.length){
-      localStorage.setItem("Cadastro", JSON.stringify(infoRegister))  
-    }
-    console.log("Estados EFFECT: ",infoRegister)
-  },[infoRegister])
-
-
-  // console.log("Storede: ",storedData)
-  // const list = useMemo(() => {
-  //   const dataLocalStorage = JSON.parse(localStorage.getItem("Cadastro"))
-  //   // setData(dataLocalStorage)
-  //   return dataLocalStorage
-  // },[])
-  
 
   // Função para lidar com a limpeza do formulário
   const handleClear = () => {
@@ -112,44 +77,41 @@ export function Register () {
         <h1>Cadastrar Produto</h1>
 
         <StyledTextField 
-        className="product"
-        id="outlined-basic" 
-        label="Nome Produto" 
-        variant="outlined"
-        type="text"
-        sx={{ width: 400}}
-        value={productName}
-        onChange={(e) => setProductName(e.target.value)}
+          className="product"
+          id="outlined-basic" 
+          label="Nome Produto" 
+          variant="outlined"
+          type="text"
+          sx={{ width: 400}}
+          value={productName}
+          onChange={(e) => setProductName(e.target.value)}
         />
         
         <StyledTextField 
-        className="quantity"
-        id="outlined-basic" 
-        label="Fornecedor" 
-        variant="outlined"
-        type="text"
-        sx={{ width: 400}}
-        value={fornecedor}
-        onChange={(e) => setFornecedor(e.target.value)}
+          className="quantity"
+          id="outlined-basic" 
+          label="Fornecedor" 
+          variant="outlined"
+          type="text"
+          sx={{ width: 400}}
+          value={fornecedor}
+          onChange={(e) => setFornecedor(e.target.value)}
         />
 
         <div className="buttons">
+          <Button 
+            variant="contained" 
+            onClick={handleClear}>
+            Limpar
+          </Button>
 
-        <Button 
-          variant="contained" 
-          onClick={handleClear}>
-          Limpar
-        </Button>
-
-        <Button 
-          variant="contained" 
-          onClick={handleSave} 
-          >Salvar
-        </Button>
-
+          <Button 
+            variant="contained" 
+            onClick={handleSave} 
+          >
+            Salvar
+          </Button>
         </div>
-
-        {/* {JSON.stringify(infoRegister)} */}
       </Content>
     </Container>
   )

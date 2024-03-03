@@ -13,7 +13,7 @@ export const ProviderMoviments = ({children}) => {
         <ContextMoviments.Provider value={{ moviments, setMoviments }}>
             {children}
         </ContextMoviments.Provider>
-    ) 
+    )
 }
 
 

@@ -40,13 +40,29 @@ const list = useMemo(() => {
       return;
     }
 
+
     if (quantity < 0) {
       toast.error("Adicione um número positivo")
       return;
     }
     
     const type = title === "Entrada" ? "input" : "output" 
-    
+
+    if (type === "output") {
+      const totalInputQuantity = moviments
+          .filter(m => m.type === "input" && m.producSelected === producSelected)
+          .reduce((acc, cur) => acc + parseInt(cur.quantity), 0);
+      
+      const totalOutputQuantity = moviments
+          .filter(m => m.type === "output" && m.producSelected === producSelected)
+          .reduce((acc, cur) => acc + parseInt(cur.quantity), 0);
+
+      if (parseInt(quantity) > totalInputQuantity - totalOutputQuantity) {
+          toast.error("A quantidade de saída não pode exceder a quantidade de entrada.");
+          return;
+      }
+  }
+
     const newDataInput = {
       producSelected,
       quantity,
@@ -58,12 +74,21 @@ const list = useMemo(() => {
 
     // setMoviments([...moviments, newDataInput]);
 
-    let newSaveMoviments = moviments
-    newSaveMoviments.push(newDataInput)
+    // let newSaveMoviments = moviments
+    // newSaveMoviments.push(newDataInput)
 
-    setMoviments(newSaveMoviments);
+    // setMoviments(newSaveMoviments);
+
+    // localStorage.setItem("Moviments", JSON.stringify(newSaveMoviments))
+
+    const newMoviments = [...moviments, newDataInput];
+
+    // Atualizando o estado com o novo array
+    setMoviments(newMoviments);
+  
+    // Salvando no localStorage
+    localStorage.setItem("Moviments", JSON.stringify(newMoviments));
     
-    localStorage.setItem("Moviments", JSON.stringify(newSaveMoviments))
     // setFormDataState(newDataInput)
 
     toast.success("Movimentação realizada com sucesso!")

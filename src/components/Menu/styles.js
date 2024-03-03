@@ -2,6 +2,10 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   
+  margin-bottom: 3rem;
+
+  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.1);
+
   h1 {
     text-align: center;
     font-size: 3rem;

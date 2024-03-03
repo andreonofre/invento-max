@@ -7,9 +7,13 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { Link, useNavigate } from 'react-router-dom';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-
+import LogoutIcon from '@mui/icons-material/Logout';
+import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import BalanceIcon from '@mui/icons-material/Balance';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
+import NorthSharpIcon from '@mui/icons-material/NorthSharp';
+import SouthSharpIcon from '@mui/icons-material/SouthSharp';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
@@ -55,49 +59,49 @@ export function Menu() {
 
       <ListItemButton component={Link} to="/dashboard">
         <ListItemIcon>
-          <InboxIcon />
+          <SignalCellularAltIcon />
         </ListItemIcon>
         <ListItemText primary="DashBoard" />
       </ListItemButton>
 
       <ListItemButton component={Link} to="/cadastro">
         <ListItemIcon>
-          <InboxIcon />
+        <BorderColorIcon />
         </ListItemIcon>
         <ListItemText primary="Cadastrar Produto" />
       </ListItemButton>
 
       <ListItemButton component={Link} to="/entrada">
         <ListItemIcon>
-          <MailIcon />
+          <NorthSharpIcon />
         </ListItemIcon>
         <ListItemText primary="Entrada" />
       </ListItemButton>
 
       <ListItemButton component={Link} to="/saida">
         <ListItemIcon>
-          <MailIcon />
+          <SouthSharpIcon />
         </ListItemIcon>
         <ListItemText primary="Saída" />
       </ListItemButton>
 
       <ListItemButton component={Link} to="/saldo_atual">
         <ListItemIcon>
-          <MailIcon />
+          <BalanceIcon />
         </ListItemIcon>
         <ListItemText primary="Saldo Atual" />
       </ListItemButton>
 
       <ListItemButton component={Link} to="/lista_produtos">
         <ListItemIcon>
-          <MailIcon />
+          <FormatListNumberedIcon />
         </ListItemIcon>
         <ListItemText primary="Lista Produtos" />
       </ListItemButton>
 
       <ListItemButton component={Link} to="/">
         <ListItemIcon>
-          <MailIcon />
+          <LogoutIcon />
         </ListItemIcon>
         <ListItemText primary="Sair" onClick={handleExit} />
       </ListItemButton>
