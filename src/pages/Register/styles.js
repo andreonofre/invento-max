@@ -16,7 +16,7 @@ export const Content = styled.div`
     
     
     width: 500px;
-    height: 450px;
+    height: 400px;
     margin: 0 auto;
     
     border-radius: 8px;
@@ -41,7 +41,7 @@ export const Content = styled.div`
     }
 
     .imageUrl {
-        margin-top: 30px;
+        /* margin-top: 30px; */
     }
 `
 

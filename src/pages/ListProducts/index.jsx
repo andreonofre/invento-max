@@ -11,12 +11,15 @@ import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
-import { Container } from './styles';
+import { Container, StyledButton, StyledModal, ModalContent } from './styles';
+import Modal from '@mui/material/Modal';
 
 export const ListProducts = () => {
   const [dataList, setDataList] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [modalOpen, setModalOpen] = useState(false);
+  const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
     const recoverListProducts = JSON.parse(localStorage.getItem("Cadastro")) || [];
@@ -45,6 +48,15 @@ export const ListProducts = () => {
     setFilteredData(dataList);
   };
 
+  const openModal = (url) => {
+    setImageUrl(url);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   return (
     <Container>
       <Menu />
@@ -70,8 +82,8 @@ export const ListProducts = () => {
             <TableRow>
               <TableCell style={{ fontWeight: 'bold' }}>Código</TableCell>
               <TableCell style={{ fontWeight: 'bold' }}>Produto</TableCell>
-              <TableCell style={{ fontWeight: 'bold' }} align="right">Fornecedor</TableCell>
-              <TableCell style={{ fontWeight: 'bold' }} align="right">Usuário</TableCell>
+              {/* <TableCell style={{ fontWeight: 'bold' }} align="right">Fornecedor</TableCell> */}
+              <TableCell style={{ fontWeight: 'bold' }} align="right">Imagem</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -84,12 +96,21 @@ export const ListProducts = () => {
                   {item.productName}
                 </TableCell>
                 <TableCell align="right">{item.fornecedor}</TableCell>
-                <TableCell align="right">{item.user}</TableCell>
+                {/* <TableCell align="right">{item.url}</TableCell> */}
+                <TableCell align="right">
+                  <StyledButton  onClick={() => openModal(item.url)}>Ver Imagem</StyledButton>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
+      <StyledModal open={modalOpen} onClose={closeModal}>
+        <ModalContent>
+          <img src={imageUrl} alt="Imagem do Produto" />
+          <StyledButton className="close" onClick={closeModal}>Fechar</StyledButton>
+        </ModalContent>
+      </StyledModal>
     </Container>
   );
 };

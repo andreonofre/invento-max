@@ -33,7 +33,7 @@ export function Register () {
 
   // Função para lidar com a submissão do formulário
   const handleSave = () => {
-    if (!productName || !fornecedor) {
+    if (!productName || !imageUrl) {
       toast.error("Por favor, preencha todos os campos!")
       return;
     }
@@ -69,8 +69,9 @@ export function Register () {
 
   // Função para lidar com a limpeza do formulário
   const handleClear = () => {
-    setProductName('');
-    setFornecedor('');
+    setProductName("");
+    setFornecedor("");
+    setImageUrl("")
   };
 
   return (
@@ -90,7 +91,7 @@ export function Register () {
           onChange={(e) => setProductName(e.target.value)}
         />
         
-        <StyledTextField 
+        {/* <StyledTextField 
           className="quantity"
           id="outlined-basic" 
           label="Fornecedor" 
@@ -99,7 +100,7 @@ export function Register () {
           sx={{ width: 400}}
           value={fornecedor}
           onChange={(e) => setFornecedor(e.target.value)}
-        />
+        /> */}
 
         <StyledTextField 
           className="imageUrl"

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Modal from "@mui/material/Modal";
 
 export const Container = styled.div`
     .containerTable {
@@ -29,6 +30,71 @@ export const Container = styled.div`
 
     }
 `
+
+// Estilização do modal
+export const StyledModal = styled(Modal)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+
+export const ModalContent = styled.div`
+  background-color: white;
+  width: 600px;
+  height: 500px;
+  outline: none;
+  border-radius: 5px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    max-width: 100%;
+    max-height: 80%;
+    /* object-fit: contain; */
+    object-fit: cover;
+  }
+
+  .close {
+    position: absolute;
+    top: 196px;
+    right: 80px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 7px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+
+    @media (max-width: 1280px) {
+      top: 200px;
+      right: 100px;
+      padding: 7px 15px;
+    }
+  }
+`;
+// Estilização do botão
+export const StyledButton = styled.button`
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
 
 
 
