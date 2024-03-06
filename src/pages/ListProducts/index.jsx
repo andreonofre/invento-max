@@ -80,10 +80,11 @@ export const ListProducts = () => {
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell style={{ fontWeight: 'bold' }}>Código</TableCell>
-              <TableCell style={{ fontWeight: 'bold' }}>Produto</TableCell>
+              <TableCell className="header" >Código</TableCell>
+              <TableCell className="header" >Produto</TableCell>
               {/* <TableCell style={{ fontWeight: 'bold' }} align="right">Fornecedor</TableCell> */}
-              <TableCell style={{ fontWeight: 'bold' }} align="right">Imagem</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }} align="right"></TableCell>
+              <TableCell className="header" align="center">Imagem</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -97,8 +98,8 @@ export const ListProducts = () => {
                 </TableCell>
                 <TableCell align="right">{item.fornecedor}</TableCell>
                 {/* <TableCell align="right">{item.url}</TableCell> */}
-                <TableCell align="right">
-                  <StyledButton  onClick={() => openModal(item.url)}>Ver Imagem</StyledButton>
+                <TableCell className="btnImage" align="center">
+                  <StyledButton   onClick={() => openModal(item.url)}>Ver Imagem</StyledButton>
                 </TableCell>
               </TableRow>
             ))}
