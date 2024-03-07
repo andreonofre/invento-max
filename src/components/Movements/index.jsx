@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Button } from "@mui/material";
+// import { Button } from "@mui/material";
+import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import { useMovimentsContext } from "../../context/ContextMoviments";
@@ -11,16 +12,39 @@ import {
   StyledTextField 
 } from "./styles";
 
+
+const motivoSaidas = [
+  {
+    value: 'uso-direto',
+    label: 'Saída para uso direto',
+  },
+  {
+    value: 'perda',
+    label: 'Saída por perda',
+  },
+  {
+    value: 'doacao',
+    label: 'Saída para doação',
+  },
+  {
+    value: 'obsoleto',
+    label: 'Saída para obsoleto',
+  }
+];
+
 export function Movements({ title }) {
   // const teste = React.useContext(ContextMoviments);
   const { moviments, setMoviments } = useMovimentsContext();
   const [producSelected, setProducSelected] = useState("")
   const [quantity, setQuantity] = useState("")
+  const [fornecedor, setFornecedor] = useState("")
   const [user, setUser] = useState('');
+  const [motivo, setMotivo] = useState("");
+  const [describe, setDescribe] = useState("");
 
 
 const list = useMemo(() => {
-  const dataLocalStorage = JSON.parse(localStorage.getItem("Cadastro"))
+  const dataLocalStorage = JSON.parse(localStorage.getItem("Cadastro")) || []
   // setData(dataLocalStorage)
   return dataLocalStorage
 },[])
@@ -35,11 +59,11 @@ const list = useMemo(() => {
 
   function handleSave () {
   
-    if (!quantity || !producSelected) {
+
+    if (!quantity || !producSelected || (!fornecedor && title === "Entrada") || (!motivo && title === "Saída") || (!describe && title === "Saída")) {
       toast.error("Por favor, preencha todos os campos.");
       return;
     }
-
 
     if (quantity < 0) {
       toast.error("Adicione um número positivo")
@@ -69,7 +93,10 @@ const list = useMemo(() => {
       id: uuidv4(),
       dataMoviment: new Date(),
       type,
-      user: user
+      user: user,
+      fornecedor,
+      motivo,
+      describe,
     }
 
     // setMoviments([...moviments, newDataInput]);
@@ -100,8 +127,11 @@ const list = useMemo(() => {
   }
 
   function handleClear () {
-    setQuantity("")
+    setQuantity("");
     setProducSelected(""); 
+    setFornecedor("");
+    setMotivo("");
+    setDescribe("");
   }
   
   return (
@@ -133,6 +163,51 @@ const list = useMemo(() => {
           value={quantity}
           onChange={(e) => setQuantity(e.target.value)}
         />
+
+          {/* Campo de fornecedor apenas para tipo de entrada */}
+          {title === "Entrada" && (
+          <StyledTextField
+            className="fornecedor"
+            id="outlined-basic"
+            label="Fornecedor"
+            variant="outlined"
+            type="text"
+            sx={{ width: 400 }}
+            value={fornecedor}
+            onChange={(e) => setFornecedor(e.target.value)}
+          />
+        )}
+
+        {title === "Saída" && (
+          <FormControl sx={{ width: 400 }} className="motivo">
+            <InputLabel id="motivo-label">Motivo</InputLabel>
+            <Select
+              labelId="motivo-label"
+              id="motivo"
+              value={motivo}
+              onChange={(e) => setMotivo(e.target.value)}
+            > {motivoSaidas?.map((item) => (
+              <MenuItem key={item.value} value={item.value}>
+                {item.label}
+              </MenuItem>
+            ))}
+            </Select>
+          </FormControl>
+        )}
+
+        {title === "Saída" && (
+            <TextField
+            sx={{ width: 400}}
+            id="outlined-multiline-flexible"
+            label="Descrição: ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Máx: 300 caracteres"
+            className="descricao"
+            multiline
+            maxRows={4}
+            value={describe}
+            inputProps={{ maxLength: 10 }}
+            onChange={(e) => setDescribe(e.target.value)}
+          />
+        )}
 
         <div className="buttons">
 

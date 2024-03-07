@@ -12,7 +12,7 @@ export const Content = styled.div`
     align-items: center;
     
     width: 500px;
-    height: 400px;
+    height: 550px;
     margin: 0 auto;
     
     border-radius: 8px;
@@ -31,6 +31,16 @@ export const Content = styled.div`
         justify-content: space-between;
         margin-top: 30px;
     }
+
+    .fornecedor {
+        margin-top: 30px;
+    }
+    
+    .motivo {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
 `
 
 

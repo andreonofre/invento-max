@@ -1,4 +1,4 @@
-import { Autocomplete, TextField } from "@mui/material";
+import { Button, Autocomplete, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -16,7 +16,7 @@ export const Content = styled.div`
     
     
     width: 500px;
-    height: 400px;
+    height: 500px;
     margin: 0 auto;
     
     border-radius: 8px;
@@ -41,7 +41,11 @@ export const Content = styled.div`
     }
 
     .imageUrl {
-        /* margin-top: 30px; */
+        margin-bottom: 30px;
+    }
+
+    .corredor {
+        margin-bottom: 30px;
     }
 `
 

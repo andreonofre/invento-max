@@ -127,6 +127,7 @@ export function Menu() {
           <FontAwesomeIcon icon={faUser} fontSize={25}/>
         </User>
       </Content>
+      
       <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
         {list}
       </Drawer>

@@ -14,7 +14,7 @@ export const Balance = () => {
   const [moviments, setMoviments] = useState([]);
 
   useEffect(() => {
-    const recoverListProducts = JSON.parse(localStorage.getItem("Cadastro"));
+    const recoverListProducts = JSON.parse(localStorage.getItem("Cadastro")) || [];
     setDataList(recoverListProducts);
   }, []);
 
@@ -84,3 +84,4 @@ export const Balance = () => {
     </Container>
   );
 };
+
