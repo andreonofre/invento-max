@@ -204,7 +204,7 @@ const list = useMemo(() => {
             multiline
             maxRows={4}
             value={describe}
-            inputProps={{ maxLength: 10 }}
+            inputProps={{ maxLength: 300 }}
             onChange={(e) => setDescribe(e.target.value)}
           />
         )}
