@@ -82,9 +82,12 @@ export const ListProducts = () => {
             <TableRow>
               <TableCell className="header" >Código</TableCell>
               <TableCell className="header" >Produto</TableCell>
-              {/* <TableCell style={{ fontWeight: 'bold' }} align="right">Fornecedor</TableCell> */}
-              <TableCell style={{ fontWeight: 'bold' }} align="right"></TableCell>
-              <TableCell className="header" align="center">Imagem</TableCell>
+             
+              {/* <TableCell style={{ fontWeight: 'bold' }} align="right"></TableCell> */}
+
+              <TableCell className="header" align="left">Corredor</TableCell>
+              <TableCell className="header" align="left">Prateleira</TableCell>
+              <TableCell className="header" align="left">Imagem</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -96,9 +99,13 @@ export const ListProducts = () => {
                 <TableCell component="th" scope="row">
                   {item.productName}
                 </TableCell>
-                <TableCell align="right">{item.fornecedor}</TableCell>
-                {/* <TableCell align="right">{item.url}</TableCell> */}
-                <TableCell className="btnImage" align="center">
+                <TableCell component="th" align="left" scope="row">
+                  {item.localization}
+                </TableCell>
+                <TableCell component="th" align="left" scope="row">
+                  {item.prateleira}
+                </TableCell>
+                <TableCell className="btnImage" align="left">
                   <StyledButton   onClick={() => openModal(item.url)}>Ver Imagem</StyledButton>
                 </TableCell>
               </TableRow>

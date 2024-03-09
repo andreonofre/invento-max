@@ -13,8 +13,8 @@ export const Container = styled.div`
   }
 
   .table {
-    min-width: 650px;
-    max-width: 800px;
+    min-width: 800px;
+    max-width: 900px;
     border-collapse: collapse;
   }
 

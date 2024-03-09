@@ -19,7 +19,8 @@ export const Balance = () => {
   }, []);
 
   useEffect(() => {
-    const recoverMoviments = JSON.parse(localStorage.getItem("Moviments"));
+    const recoverMoviments = JSON.parse(localStorage.getItem("Moviments")) || [];
+
     setMoviments(recoverMoviments);
   }, []);
 
@@ -33,6 +34,7 @@ export const Balance = () => {
             <TableRow>
               <TableCell style={{ fontWeight: "bold" }}>Código</TableCell>
               <TableCell style={{ fontWeight: "bold" }}>Produto</TableCell>
+              {/* <TableCell style={{ fontWeight: "bold" }}>Fornecedor</TableCell> */}
               <TableCell align="right" style={{ fontWeight: "bold" }}>
                 Saldo atual
               </TableCell>
@@ -74,6 +76,9 @@ export const Balance = () => {
                   <TableCell component="th" scope="row">
                     {item.productName}
                   </TableCell>
+                  {/* <TableCell component="th" scope="row">
+                    {item.fornecedor}
+                  </TableCell> */}
                   <TableCell align="right">{currentBalance}</TableCell>
                 </TableRow>
               );
