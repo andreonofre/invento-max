@@ -41,6 +41,7 @@ export function Movements({ title }) {
   const [user, setUser] = useState('');
   const [motivo, setMotivo] = useState("");
   const [describe, setDescribe] = useState("");
+  const [valor, setValor] = useState();
 
 
 const list = useMemo(() => {
@@ -60,7 +61,7 @@ const list = useMemo(() => {
   function handleSave () {
   
 
-    if (!quantity || !producSelected || (!fornecedor && title === "Entrada") || (!motivo && title === "Saída") || (!describe && title === "Saída")) {
+    if (!quantity || !producSelected || (!fornecedor && title === "Entrada") || (!motivo && title === "Saída") || (!describe && title === "Saída") || (!valor && title === "Entrada")) {
       toast.error("Por favor, preencha todos os campos.");
       return;
     }
@@ -70,7 +71,7 @@ const list = useMemo(() => {
       return;
     }
     
-    const type = title === "Entrada" ? "input" : "output" 
+    const type = title === "Entrada" ? "input" : "output"
 
     if (type === "output") {
       const totalInputQuantity = moviments
@@ -97,6 +98,7 @@ const list = useMemo(() => {
       fornecedor,
       motivo,
       describe,
+      valor: valor * quantity,
     }
 
     // setMoviments([...moviments, newDataInput]);
@@ -132,6 +134,7 @@ const list = useMemo(() => {
     setFornecedor("");
     setMotivo("");
     setDescribe("");
+    setValor("");
   }
   
   return (
@@ -169,6 +172,19 @@ const list = useMemo(() => {
           <StyledTextField
             className="fornecedor"
             id="outlined-basic"
+            label="Valor unitário R$"
+            variant="outlined"
+            type="number"
+            sx={{ width: 400 }}
+            value={valor}
+            onChange={(e) => setValor(e.target.value)}
+          />
+        )}
+
+          {title === "Entrada" && (
+          <StyledTextField
+            className="fornecedor"
+            id="outlined-basic"
             label="Fornecedor"
             variant="outlined"
             type="text"
@@ -178,7 +194,7 @@ const list = useMemo(() => {
           />
         )}
 
-        {title === "Saída" && (
+        {/* {title === "Saída" && (
           <FormControl sx={{ width: 400 }} className="motivo">
             <InputLabel id="motivo-label">Motivo</InputLabel>
             <Select
@@ -193,6 +209,24 @@ const list = useMemo(() => {
             ))}
             </Select>
           </FormControl>
+        )} */}
+
+        {title === "Saída" && (
+          <StyledAutocomplete
+            disablePortal
+            sx={{ width: 400 }}
+            className="motivo"
+            options={motivoSaidas.map((item) => item.label)}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Motivo"
+                variant="outlined"
+              />
+            )}
+            value={motivo}
+            onChange={(event, newValue) => setMotivo(newValue)}
+          />
         )}
 
         {title === "Saída" && (
@@ -214,7 +248,7 @@ const list = useMemo(() => {
           <Button 
           variant="contained" 
           onClick={handleClear}
-          >
+          color="error">
             Limpar
           </Button>
 
