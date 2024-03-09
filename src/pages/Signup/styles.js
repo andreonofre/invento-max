@@ -9,6 +9,11 @@ export const Container = styled.div`
 
     h1 {
         text-align: center;
+        font-size: 4rem;
+        z-index: 3;
+        background: linear-gradient(to right, #2e21ec, #031080);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
 `
 
