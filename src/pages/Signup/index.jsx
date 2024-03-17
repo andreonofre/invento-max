@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 // import { Link, useHistory } from "react-router-dom";
 // import { createBrowserHistory } from 'history';
 import { useNavigate } from "react-router-dom";
+import * as Yup from 'yup';
+
 
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
@@ -30,42 +32,89 @@ export function Signup() {
   };
 
 
+  const schema = Yup.object().shape({
+    username: Yup.string().required("Nome de usuário é obrigatório"),
+    email: Yup.string()
+      .email("Insira um e-mail válido")
+      .required("E-mail é obrigatório"),
+    password: Yup.string()
+      .min(8, "A senha deve ter pelo menos 8 caracteres")
+      .required("Senha é obrigatória"),
+  });
 
-    const handleSave = (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
-  
-    // Verifica se algum campo está vazio
-    if (!username || !email || !password) {
-      toast.error("Preencha todos os campos!");
-      return;
+    try {
+      await schema.validate({ username, email, password }, { abortEarly: false });
+
+      const newFormData = {
+        username,
+        email,
+        password,
+        id: uuidv4(),
+      };
+
+      let newSavedData = [...savedData];
+      newSavedData.push(newFormData);
+      setSavedData(newSavedData);
+
+      localStorage.setItem("user_data", JSON.stringify(newSavedData));
+
+      toast.success(
+        "Usuário cadastrado com sucesso! Faça o login abaixo."
+      );
+
+      setUsername("");
+      setEmail("");
+      setPassword("");
+
+      navigate("/");
+    } catch (error) {
+      error.inner.forEach((err) => {
+        toast.error(err.message);
+      });
     }
-  
-    const newFormData = {
-      username,
-      email,
-      password,
-      id: uuidv4(),
-    };
-  
-    let newSavedData = savedData
-    newSavedData.push(newFormData)
-
-    setSavedData(newSavedData);
-    
-    localStorage.setItem("user_data", JSON.stringify(newSavedData));
-
-    console.log("Estado depois de atualizar: ", newSavedData);
-    
-
-    toast.success("Usuário Cadastrado com sucesso, faça o login abaixo!")
-    // Limpa os campos do formulário
-    setUsername("");
-    setEmail("");
-    setPassword("");
-    
-    // Navega para a próxima página
-    navigate("/");
   };
+
+
+
+  //   const handleSave = (e) => {
+  //   e.preventDefault();
+  
+  //   // Verifica se algum campo está vazio
+  //   if (!username || !email || !password) {
+  //     toast.error("Preencha todos os campos!");
+  //     return;
+  //   }
+  
+  //   const newFormData = {
+  //     username,
+  //     email,
+  //     password,
+  //     id: uuidv4(),
+  //   };
+  
+  //   let newSavedData = savedData
+  //   newSavedData.push(newFormData)
+
+  //   setSavedData(newSavedData);
+    
+  //   localStorage.setItem("user_data", JSON.stringify(newSavedData));
+
+  //   console.log("Estado depois de atualizar: ", newSavedData);
+    
+
+  //   toast.success("Usuário Cadastrado com sucesso, faça o login abaixo!")
+  //   // Limpa os campos do formulário
+  //   setUsername("");
+  //   setEmail("");
+  //   setPassword("");
+    
+  //   // Navega para a próxima página
+  //   navigate("/");
+  // };
+
+
 
 
   useEffect(() => {

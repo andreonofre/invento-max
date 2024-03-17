@@ -36,7 +36,7 @@ export function Movements({ title }) {
   // const teste = React.useContext(ContextMoviments);
   const { moviments, setMoviments } = useMovimentsContext();
   const [producSelected, setProducSelected] = useState("")
-  const [quantity, setQuantity] = useState("")
+  const [quantity, setQuantity] = useState()
   const [fornecedor, setFornecedor] = useState("")
   const [user, setUser] = useState('');
   const [motivo, setMotivo] = useState("");
@@ -77,16 +77,21 @@ const list = useMemo(() => {
       const totalInputQuantity = moviments
           .filter(m => m.type === "input" && m.producSelected === producSelected)
           .reduce((acc, cur) => acc + parseInt(cur.quantity), 0);
-      
+
       const totalOutputQuantity = moviments
           .filter(m => m.type === "output" && m.producSelected === producSelected)
           .reduce((acc, cur) => acc + parseInt(cur.quantity), 0);
 
-      if (parseInt(quantity) > totalInputQuantity - totalOutputQuantity) {
+          const totalMoviments = totalInputQuantity - totalOutputQuantity;
+
+          
+          
+      if (parseInt(quantity) > totalMoviments) {
           toast.error("A quantidade de saída não pode exceder a quantidade de entrada.");
           return;
       }
   }
+
 
     const newDataInput = {
       producSelected,
@@ -95,10 +100,14 @@ const list = useMemo(() => {
       dataMoviment: new Date(),
       type,
       user: user,
-      fornecedor,
-      motivo,
-      describe,
-      valor: valor * quantity,
+      // fornecedor,
+      // motivo,
+      // describe,
+      // valor: valor * quantity,
+      fornecedor: title === "Entrada" ? fornecedor : "",
+      motivo: title === "Saída" ? motivo : "",
+      describe: title === "Saída" ? describe : "",
+      valor: title === "Entrada" ? valor * quantity : "",
     }
 
     // setMoviments([...moviments, newDataInput]);
